@@ -7,8 +7,8 @@ int InputFirstOne(void){/*getchar will only accept one character for the main pr
     return ch;
 }
 int main(void){
-    int counter =0, cha;
-    while(counter<1e+6){
+    int counter=0, cha;
+    while(counter<1e+6){/*we have this condition to make sure that*/
         if(counter % 1000 !=999){
             putchar('D');
             fflush(stdout);
