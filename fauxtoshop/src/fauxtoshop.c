@@ -3,6 +3,8 @@
 #define MIN_HEADER_SIZE 54
 #define WIDTH 18
 #define HEIGHT 22
+#define BITS_PER_PIXEL 28
+
 
 void readBMP(){/**/
 char header[MIN_HEADER_SIZE];
@@ -13,9 +15,6 @@ if(read != 1){/*we check if fread has read the proper number of bytes from a pro
 fprintf(stderr, "Could not read headers");/*if not this message is printed and the program is terminated*/
 exit(1);
 }
-printf("First char: %c\n", header[0]);
-printf("Second char: %c\n", header[1]);
-
 if(header[0] != 'B' || header[1] != 'M'){/*check if the bmp file starts with the magic header ('B' 'M')*/
 printf("Wrong input");/*if not this message is printed and the program is terminated*/
 exit(1);
