@@ -6,7 +6,7 @@
 #define BITS_PER_PIXEL 28
 
 
-void readBMP(){/**/
+void readBMP(){
 char header[MIN_HEADER_SIZE];
 char *other_data;
 char *pixel_data;
@@ -16,13 +16,13 @@ fprintf(stderr, "Could not read headers");/*if not this message is printed and t
 exit(1);
 }
 if(header[0] != 'B' || header[1] != 'M'){/*check if the bmp file starts with the magic header ('B' 'M')*/
-printf("Wrong input");/*if not this message is printed and the program is terminated*/
+fprintf(stderr, "Wrong input");/*if not this message is printed and the program is terminated*/
 exit(1);
 }
-int width, height;/*we save width and height of the bmp file it these integer type variables*/
+int width, height;/*we save width and height of the bmp file in these integer type variables*/
 width  = *(unsigned int*)&header[WIDTH];
 height = *(unsigned int*)(header+HEIGHT);
-//We swap with and heigh in the header
+//We swap width and height in the header
 *(unsigned int*)&header[WIDTH]=height;
 *(unsigned int*)&header[HEIGHT]=width;
 //we push those changes in stdout
