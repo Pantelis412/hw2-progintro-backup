@@ -6,17 +6,26 @@
 #define BITS_PER_PIXEL 28
 
 
-void readBMP(){
+void change_header(){
 char header[MIN_HEADER_SIZE];
 char *other_data;
 char *pixel_data;
 int read = fread(header, MIN_HEADER_SIZE,1,stdin);/*we use fread to read the header of a bmp file*/
-if(read != 1){/*we check if fread has read the proper number of bytes from a proper bmp file*/
-fprintf(stderr, "Could not read headers");/*if not this message is printed and the program is terminated*/
+//we check if fread has read the proper number of bytes from a proper bmp file
+if(read != 1){
+fprintf(stderr, "Could not read headers");
 exit(1);
 }
-if(header[0] != 'B' || header[1] != 'M'){/*check if the bmp file starts with the magic header ('B' 'M')*/
-fprintf(stderr, "Wrong input");/*if not this message is printed and the program is terminated*/
+//check if the bmp file starts with the magic header ('B' 'M')
+if(header[0] != 'B' || header[1] != 'M'){
+fprintf(stderr, "Wrong input");
+exit(1);
+}
+//we check if the bmp file uses 24 bits per pixel
+int bits;
+bits=header[BITS_PER_PIXEL] + header[BITS_PER_PIXEL+1]*256;
+if(bits != 24){
+fprintf(stderr, "Wrong bits per pixel size");
 exit(1);
 }
 int width, height;/*we save width and height of the bmp file in these integer type variables*/
@@ -37,10 +46,9 @@ void writeBMP(){
 
 }
 int main(){
-char header[MIN_HEADER_SIZE];
 char *other_data;
 char *pixel_data;
-readBMP();
+change_header();
 rotateBMP();
 writeBMP();
 }
