@@ -4,12 +4,13 @@
 #define WIDTH 18
 #define HEIGHT 22
 #define BITS_PER_PIXEL 28
+#define OFFSET 10
+
+int offset;
 
 
 void change_header(){
 char header[MIN_HEADER_SIZE];
-char *other_data;
-char *pixel_data;
 int read = fread(header, MIN_HEADER_SIZE,1,stdin);/*we use fread to read the header of a bmp file*/
 //we check if fread has read the proper number of bytes from a proper bmp file
 if(read != 1){
@@ -36,6 +37,7 @@ height = *(unsigned int*)(header+HEIGHT);
 *(unsigned int*)&header[HEIGHT]=width;
 //we push those changes in stdout
 fwrite(header, MIN_HEADER_SIZE,1,stdout);
+offset=header[OFFSET] + header[OFFSET+1]*256 + header[OFFSET+2]*256*256+ header[OFFSET+3]*256*256*256;
 }
 
 void rotateBMP(){
@@ -46,8 +48,6 @@ void writeBMP(){
 
 }
 int main(){
-char *other_data;
-char *pixel_data;
 change_header();
 rotateBMP();
 writeBMP();
