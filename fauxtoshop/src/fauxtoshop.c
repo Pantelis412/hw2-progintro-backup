@@ -40,8 +40,24 @@ fwrite(header, MIN_HEADER_SIZE,1,stdout);
 offset=header[OFFSET] + header[OFFSET+1]*256 + header[OFFSET+2]*256*256+ header[OFFSET+3]*256*256*256;
 }
 
-void rotateBMP(){
-
+void change_otherdata(){
+    int extra=offset-54;
+    //if there are no other data the function doeas nothing 
+    if (extra==0){}
+    //else we dynamicly create an array in which we read the othere data(or the extra data of an extended header or both) and write it in our file
+    else {
+       char *other;
+       other = (char*) malloc(extra);
+       int read=fread(other,sizeof(char),extra,stdin);
+       //we check if fread has read the proper number of bytes from "other data" of a proper bmp file
+        if(read != extra){
+            fprintf(stderr, "Could not read other data");
+            exit(1);
+        }
+       fwrite(other,sizeof(char),extra,stdout);
+       //if malloc was succesful we free the allocated memory
+       if( other!=NULL) free(other);
+    }
 }
 
 void writeBMP(){
@@ -49,6 +65,6 @@ void writeBMP(){
 }
 int main(){
 change_header();
-rotateBMP();
+change_otherdata();
 writeBMP();
 }
