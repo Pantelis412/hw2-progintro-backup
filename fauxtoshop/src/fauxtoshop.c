@@ -5,6 +5,8 @@
 #define HEIGHT 22
 #define BITS_PER_PIXEL 28
 #define OFFSET 10
+#define FILE_SIZE 2
+#define IMAGE_SIZE 34
 
 int offset;
 
@@ -35,9 +37,16 @@ height = *(unsigned int*)(header+HEIGHT);
 //We swap width and height in the header
 *(unsigned int*)&header[WIDTH]=height;
 *(unsigned int*)&header[HEIGHT]=width;
-//we push those changes in stdout
-fwrite(header, MIN_HEADER_SIZE,1,stdout);
 offset=header[OFFSET] + header[OFFSET+1]*256 + header[OFFSET+2]*256*256+ header[OFFSET+3]*256*256*256;
+//we calculate the new and the old padding based on the width and heigth of the header and we change the information about he file size and the image size of the header
+int old_padding=4-(width%4);
+old_padding*=width;
+int new_padding=4-(height%4);
+new_padding*=height;
+*(unsigned int*)&header[FILE_SIZE]=*(unsigned int*)&header[FILE_SIZE] - old_padding + new_padding;
+*(unsigned int*)&header[IMAGE_SIZE]=*(unsigned int*)&header[IMAGE_SIZE] - old_padding + new_padding;
+//we push these changes in stdout
+fwrite(header, MIN_HEADER_SIZE,1,stdout);
 }
 
 void change_otherdata(){
@@ -60,11 +69,12 @@ void change_otherdata(){
     }
 }
 
-void writeBMP(){
+void pixelarray(){
 
 }
 int main(){
 change_header();
 change_otherdata();
-writeBMP();
+pixelarray();
+return 0;
 }
