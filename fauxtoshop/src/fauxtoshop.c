@@ -130,10 +130,26 @@ for(int i=0; i<o_height; i++){
 }
 free(array1);
 
+
+
+
+//attempt diavasmatos
+char p='P';
+for(int j=3*o_width-1; j>=0; j--){
+    for(int i=0; i<o_height; i++){
+        fwrite(&array2[i][j],sizeof(char),1,stdout);
+    }
+    for(int k=1; k<=n_padding; k++){
+        fwrite(&p,sizeof(char),1,stdout);
+    }
+
+}
+
 //Step 3, we create a dynamic 2D array in which we store the data of array2 but every 3 columns we add an extra filled with a radom character. I chose to fil it with 'N'.
 //We know that width and height are multiples of three so the collumns of the array3 will be 3*width+(3*width)/3
 //Then we free array2
-char **array3;
+
+/*char **array3;
 array3= (char**) malloc(o_height*sizeof(char*));
 if (array3==NULL){
     fprintf(stderr,"Not available memory\n");
@@ -157,16 +173,17 @@ for(int i=1; i<=o_height; i++){
             array3[i-1][j-1]=array2[i-1][j-1-counter];
     }
     }
-}
+}*/
 //we free array2
-for(int i=0; i<o_height; i++){
+/*for(int i=0; i<o_height; i++){
     free(array2[i]);
 }
-free(array2);
+free(array2);*/
 
 //Step 4, we create dynamic 2D array and we use casting to transfer and rotate the data from array3 in quads
 //Then we free array3
-int n_width=4*o_height;
+
+/*int n_width=4*o_height;
 int n_height=o_width;
 char **array4;
 array4= (char**) malloc(n_height*sizeof(char*));
@@ -189,41 +206,24 @@ for(int j=4*n_height -1; j>=0; j-=4){
         *( int*)&array4[a][b]=*( int*)&array3[i][j];
     }
 }
-/*
-int a = -1, b = -1;
-for (int j = 4 * o_width-1; j > 0; j -= 4) {
-    ++a;
-    b = -1;
-    for (int i = 0; i < o_height; i++) {
-        ++b;
-        // Avoid accessing array3 out of bounds
-        if (a < n_height && b < n_width) {
-            // Use memcpy for better memory copy
-            memcpy(&array4[a][b], &array3[i][j], sizeof(int));
-        } else {
-            fprintf(stderr, "Out of bounds access in array4\n");
-            exit(1);
-        }
-    }
-}
 */
 //we free array3
-for(int i=0; i<o_height; i++){
+/*for(int i=0; i<o_height; i++){
     free(array3[i]);
 }
 free(array3);
-
+*/
 //Step 5,we create a dynamic 2D array where we transfer data from array4 but we remove the useless bytes(those filled with 'N') from array4
 //Then we free array4
-char **array5;
+/*char **array5;
 array5= (char**) malloc(n_height*sizeof(char*));
 if (array5==NULL){
     fprintf(stderr,"Not available memory\n");
     exit(1);
 }
 for(int i=0; i<(n_height);i++){
-    array5[i]=(char*)malloc((n_width-o_height)*sizeof(char));/*remember n_width is equal to 4*o_heigth*/
-    if (array5[i] == NULL){
+    array5[i]=(char*)malloc((n_width-o_height)*sizeof(char));*//*remember n_width is equal to 4*o_heigth*/
+   /* if (array5[i] == NULL){
     fprintf(stderr,"Not available memory\n");
     exit(1);
 }}
@@ -237,15 +237,15 @@ for(int i=1; i<=n_height; i++){
             array5[i-1][j-1]=array4[i-1][j+counter];
     }
     }
-}
+}*/
 //we free array4
-for(int i=0; i<n_height; i++){
+/*for(int i=0; i<n_height; i++){
     free(array4[i]);
 }
-free(array4);
+free(array4);*/
 // Step 6, we add padding if there is need to do so, and then we push the data to stdout (row by row)
 //we free array5 and array6
-int new_width=n_width-o_height;
+/*int new_width=n_width-o_height;
 char **array6;
     array6= (char**) malloc(n_height*sizeof(char*));
     if (array6==NULL){
@@ -266,9 +266,9 @@ else{
         }
     }
 }
-fwrite(array6,sizeof(char),(new_width+n_padding)*n_height,stdout);
+fwrite(array6,sizeof(char),(new_width+n_padding)*n_height,stdout);*/
 //we free array5
-for(int i=0; i<n_height; i++){
+/*for(int i=0; i<n_height; i++){
     free(array5[i]);
 }
 free(array5);
@@ -279,7 +279,8 @@ for(int i=0; i<n_height; i++){
 free(array6);
 
 
-}
+*/}
+
 int main(){
 change_header();
 change_otherdata();
