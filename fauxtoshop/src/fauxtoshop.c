@@ -135,8 +135,10 @@ free(array1);
 
 //attempt diavasmatos
 char p='P';
-for(int j=3*o_width-1; j>=0; j--){
+for(int j=3*o_width-1; j>=0; j-=3){
     for(int i=0; i<o_height; i++){
+        fwrite(&array2[i][j-2],sizeof(char),1,stdout);
+        fwrite(&array2[i][j-1],sizeof(char),1,stdout);
         fwrite(&array2[i][j],sizeof(char),1,stdout);
     }
     for(int k=1; k<=n_padding; k++){
