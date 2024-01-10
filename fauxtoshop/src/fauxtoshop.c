@@ -177,10 +177,10 @@ for(int i=1; i<=o_height; i++){
     }
 }*/
 //we free array2
-/*for(int i=0; i<o_height; i++){
+for(int i=0; i<o_height; i++){
     free(array2[i]);
 }
-free(array2);*/
+free(array2);
 
 //Step 4, we create dynamic 2D array and we use casting to transfer and rotate the data from array3 in quads
 //Then we free array3
