@@ -43,7 +43,8 @@ o_height=height;
 //We swap width and height in the header
 *(unsigned int*)&header[WIDTH]=height;
 *(unsigned int*)&header[HEIGHT]=width;
-offset=header[OFFSET] + header[OFFSET+1]*256 + header[OFFSET+2]*256*256+ header[OFFSET+3]*256*256*256;
+offset  = *(unsigned int*)&header[OFFSET];
+//offset=header[OFFSET] + header[OFFSET+1]*256 + header[OFFSET+2]*256*256+ header[OFFSET+3]*256*256*256;<---
 //we calculate the new and the old padding based on the width and heigth of the header and we change the information about he file size and the image size of the header
 int old_padding;
 if (((3*width)%4)==0) old_padding=0;
