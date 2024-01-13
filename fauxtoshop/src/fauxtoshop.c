@@ -149,7 +149,7 @@ void pixelarray() {
   //Moreover, every pixel conists of three bytes,which means three consecutive elements of the array.
   //Thus, we want to read array2 from right to left, taking 3 elements at a time 
   //After each line, we add the padding if necessary
-  char p = 'P';
+  char p = '\0';
   for (int j = 3 * o_width - 1; j >= 0; j -= 3) {
     for (int i = 0; i < o_height; i++) {  // it writes three bytes every time to
                                           // correclty represent the pixels
