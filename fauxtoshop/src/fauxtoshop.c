@@ -146,7 +146,7 @@ void pixelarray() {
 
   //Step 3, we want to rotate the pixel array so that the image we make has been rotated by 90 degrees to the right.
   //However, the pixel array is inverted so the first line we read actually depicts the bottom line of the picture.
-  //Moreover, every pixel conists of three bytes,which means three consecutive elements of the array.
+  //Moreover, every pixel consists of three bytes,which means three consecutive elements of the array.
   //Thus, we want to read array2 from right to left, taking 3 elements at a time 
   //After each line, we add the padding if necessary
   char p = '\0';
