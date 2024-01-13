@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-// #include <string.h>
 #define MIN_HEADER_SIZE 54
 #define WIDTH 18
 #define HEIGHT 22
@@ -100,7 +99,7 @@ void pixelarray() {
     fprintf(stderr, "Not available memory\n");
     exit(1);
   }
-  for (int i = 0; i < (o_height); i++) {
+  for (int i = 0; i < (o_height); i++) {//we read in the array1 line by line to avoid errors
     array1[i] = (char *)malloc(((3 * o_width) + o_padding) * sizeof(char));
     if (array1[i] == NULL) {
       fprintf(stderr, "Not available memory\n");
