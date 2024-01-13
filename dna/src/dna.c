@@ -3,20 +3,20 @@
 
 void comparison(char* string1, char* string2, int counter1, int counter2) {
   int position, length = 0, max_length = 0, a, b, count = 0, k;
-  for (int i = 0; i < counter1; i++) {
+  for (int i = 0; i < counter1; i++) {//we compare a character from the first string to all characters of the second until we find a match
     for (int j = 0; j < counter2; j++) {
-      if (string1[i] == string2[j]) {
+      if (string1[i] == string2[j]) {//When we find that match we check if the next character of the first string matches the next character of the second string. We do that here"***""
         length = 1;
-        a = i;
-        b = j;
-        if (counter1 - a > 0 && counter2 - b > 0) {
+        a = i;//we use different variables
+        b = j;//insdie the loop
+        if (counter1 - a > 0 && counter2 - b > 0) {//we check if both strings have available charcters to compare
           a++;
           b++;
         } else
           break;
-        while (string1[a] == string2[b]) {
-          length += 1;
-          if (counter1 - a > 0 && counter2 - b > 0) {
+        while (string1[a] == string2[b]) {//"***"
+          length += 1;//we count the length of the match
+          if (counter1 - a > 0 && counter2 - b > 0) {//we keep doing that as long as there are available characters in both strings and there is still a match
             a++;
             b++;
             
@@ -24,12 +24,14 @@ void comparison(char* string1, char* string2, int counter1, int counter2) {
             break;
         }
       }
-      if (max_length < length) {
-        position = i;
+      if (max_length < length) {//when we do not have a match anymore, we check to see if our match is bigger in length than the greatest one we have.
+        position = i;//if yes, we store the position of the string1's first character of the match in this variable
         max_length = length;
       }
     }
   }
+  //when we are done with this process,
+  //if there is a match we print the part of string1 from the starting point of the biggest match to the starting point of the biggest match plus the length of the biggest match
   if (length != 0) {
     for (k = position; k < position+max_length; k++) {
       printf("%c", string1[k]);
